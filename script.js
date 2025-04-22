@@ -37,6 +37,7 @@ let videos = [
     },
 ];
 
+// Shuffle videos
 videos.sort(() => Math.random() - 0.5);
 let currentVideoIndex = 0;
 let selectedRating = 0;
@@ -46,10 +47,10 @@ const ratingContainer = document.getElementById('ratingContainer');
 const nextButton = document.getElementById('nextButton');
 const rankingContainer = document.getElementById('rankingContainer');
 
-// script.js (Änderung in der displayVideo Funktion)
 function displayVideo() {
     videoContainer.innerHTML = "";
     ratingContainer.innerHTML = "";
+    ratingContainer.classList.add('hidden');
     nextButton.style.display = "none";
     selectedRating = 0;
 
@@ -58,40 +59,78 @@ function displayVideo() {
         return;
     }
     const video = videos[currentVideoIndex];
+
+    // Info-Div (optional additional info)
     const infoDiv = document.createElement('div');
+    infoDiv.classList.add('info');
+    infoDiv.classList.add('hidden');
     infoDiv.innerHTML = `<h2>${video.title}</h2><p>von ${video.creator}</p>`;
     videoContainer.appendChild(infoDiv);
 
+    // Card-Container
+    const cardContainer = document.createElement('div');
+    cardContainer.classList.add('card-container');
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    // Card Front
+    const cardFront = document.createElement('div');
+    cardFront.classList.add('card-front');
+    cardFront.innerHTML = `<h2>${video.title}</h2><p>von ${video.creator}</p>`;
+
+
+    //add to cart front an progress bar
+    const progressBar = document.createElement('div');
+    progressBar.classList.add('progress-bar');
+    const progress = document.createElement('div');
+    progress.classList.add('progress');
+    progress.style.width = `0%`;
+    progressBar.appendChild(progress);
+    cardFront.appendChild(progressBar);
+    setTimeout(() => {
+        progress.style.width = `100%`;
+    }, 100);
+
+    // Card Back
+    const cardBack = document.createElement('div');
+    cardBack.classList.add('card-back');
     const videoId = new URL(video.youTubeUrl).searchParams.get("v");
 
-    // Erstelle einen Container für das responsive Video
-    const wrapperDiv = document.createElement('div');
-    wrapperDiv.classList.add('video-wrapper');
+    // Assemble card
+    card.appendChild(cardFront);
+    card.appendChild(cardBack);
+    cardContainer.appendChild(card);
+    videoContainer.appendChild(cardContainer);
 
-    const iframe = document.createElement('iframe');
-    iframe.src = "https://www.youtube.com/embed/" + videoId + "?rel=0";
-    iframe.setAttribute("frameborder", "0");
-    iframe.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
-    iframe.setAttribute("allowfullscreen", "");
-    //force 1080p
-    iframe.setAttribute("width", "100%");
-    iframe.setAttribute("height", "100%");
 
-    wrapperDiv.appendChild(iframe);
-    videoContainer.appendChild(wrapperDiv);
-
+    // Create stars
     for (let i = 1; i <= 5; i++) {
-        const starSpan = document.createElement('span');
-        starSpan.textContent = "★";
-        starSpan.classList.add('star');
-        starSpan.dataset.value = i;
-        starSpan.addEventListener('click', () => selectRating(i));
-        ratingContainer.appendChild(starSpan);
+        const star = document.createElement('div');
+        star.textContent = "★";
+        star.classList.add('star');
+        star.dataset.value = i;
+        star.addEventListener('click', () => selectRating(i));
+        ratingContainer.appendChild(star);
     }
+
+    // Auto-flip after 3s
+    setTimeout(() => {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        cardBack.appendChild(iframe);
+
+        card.classList.add('flipped');
+        ratingContainer.classList.remove('hidden');
+        infoDiv.classList.remove('hidden');
+    }, 4000);
 }
 
 function selectRating(ratingValue) {
-    // Prüfe, ob bereits volle Bewertung oder halbe Bewertung gesetzt ist und toggle
     if (selectedRating === ratingValue) {
         selectedRating = ratingValue - 0.5;
     } else if (selectedRating === ratingValue - 0.5) {
@@ -107,35 +146,88 @@ function updateStars() {
     const stars = ratingContainer.querySelectorAll('.star');
     stars.forEach(star => {
         star.classList.remove('selected', 'half');
-        const starValue = parseInt(star.dataset.value);
-        if (starValue <= Math.floor(selectedRating)) {
-            star.classList.add('selected');
-        } else if (starValue === Math.floor(selectedRating) + 1 && selectedRating % 1 !== 0) {
-            star.classList.add('half');
-        }
+        const val = parseInt(star.dataset.value, 10);
+        if (val <= Math.floor(selectedRating)) star.classList.add('selected');
+        else if (val === Math.floor(selectedRating) + 1 && selectedRating % 1 !== 0) star.classList.add('half');
     });
 }
 
 nextButton.addEventListener('click', () => {
+    // Save rating
     videos[currentVideoIndex].rating = selectedRating;
     currentVideoIndex++;
-    displayVideo();
+
+    // If done, show ranking
+    if (currentVideoIndex >= videos.length) {
+        displayRanking();
+        return;
+    }
+
+    // Grab current card elements
+    const card = document.querySelector('.card');
+    const cardFront = card.querySelector('.card-front');
+    const cardBack = card.querySelector('.card-back');
+    const nextVideo = videos[currentVideoIndex];
+
+    // Hide controls and flip back to front
+    ratingContainer.classList.add('hidden');
+    nextButton.style.display = 'none';
+    card.classList.remove('flipped');
+    videoContainer.querySelector('.info').classList.add('hidden');
+
+    // Update content
+    cardFront.innerHTML = `<h2>${nextVideo.title}</h2><p>von ${nextVideo.creator}</p>`;
+    const nextVideoId = new URL(nextVideo.youTubeUrl).searchParams.get("v");
+
+    //add to cart front an progress bar
+    const progressBar = document.createElement('div');
+    progressBar.classList.add('progress-bar');
+    const progress = document.createElement('div');
+    progress.classList.add('progress');
+    progress.style.width = `0%`;
+    progressBar.appendChild(progress);
+    cardFront.appendChild(progressBar);
+
+    setTimeout(() => {
+        progress.style.width = `100%`;
+    }, 100);
+
+    //stop playing the current video
+    const currentIframe = cardBack.querySelector('iframe');
+    if (currentIframe) {
+        setTimeout(() => {
+            currentIframe.src = "";
+        }, 300);
+    }
+
+    // After 3s, flip to back and show rating
+    setTimeout(() => {
+        selectRating(0);
+        nextButton.style.display = 'none';
+        card.classList.add('flipped');
+        ratingContainer.classList.remove('hidden');
+        videoContainer.querySelector('.info').classList.remove('hidden');
+        videoContainer.querySelector('.info').innerHTML = `<h2>${nextVideo.title}</h2><p>von ${nextVideo.creator}</p>`;
+        const nextIframe = cardBack.querySelector('iframe');
+        nextIframe.src = `https://www.youtube.com/embed/${nextVideoId}?rel=0&autoplay=1`;
+    }, 4000);
 });
 
 function displayRanking() {
     videoContainer.innerHTML = "";
     ratingContainer.innerHTML = "";
+    ratingContainer.classList.add('hidden');
     nextButton.style.display = "none";
 
-    let sortedVideos = videos.slice().sort((a, b) => b.rating - a.rating);
-    rankingContainer.innerHTML = "<h2>Ranking</h2>";
-    const ul = document.createElement('ol');
-    sortedVideos.forEach(video => {
+    const sorted = videos.slice().sort((a, b) => b.rating - a.rating);
+    rankingContainer.innerHTML = '<h2>Ranking</h2>';
+    const ol = document.createElement('ol');
+    sorted.forEach(v => {
         const li = document.createElement('li');
-        li.innerHTML = `${video.title} - ${video.creator}: ${video.rating} Sterne`;
-        ul.appendChild(li);
+        li.innerHTML = `${v.title} - ${v.creator}: ${v.rating} Sterne`;
+        ol.appendChild(li);
     });
-    rankingContainer.appendChild(ul);
+    rankingContainer.appendChild(ol);
 }
 
 displayVideo();
