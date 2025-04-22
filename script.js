@@ -35,6 +35,12 @@ let videos = [
         creator: "999cedi",
         rating: null,
     },
+    {
+        youTubeUrl: "https://www.youtube.com/watch?v=84Z7DF4eBoY",
+        title: "End of Beginning 💔 (Fortnite Montage)",
+        creator: "craithfnr",
+        rating: null,
+    },
 ];
 
 // Shuffle videos
@@ -44,6 +50,7 @@ let selectedRating = 0;
 
 const videoContainer = document.getElementById('videoContainer');
 const ratingContainer = document.getElementById('ratingContainer');
+ratingContainer.classList.add('hidden');
 const nextButton = document.getElementById('nextButton');
 const rankingContainer = document.getElementById('rankingContainer');
 const counter = document.getElementById('counter');
@@ -239,4 +246,8 @@ function displayRanking() {
     rankingContainer.appendChild(ol);
 }
 
-displayVideo();
+document.getElementById('startButton').addEventListener('click', () => {
+    document.getElementById('start').classList.add('hidden');
+    videoContainer.classList.remove('hidden');
+    displayVideo();
+});

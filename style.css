@@ -25,6 +25,7 @@ body {
     background-repeat: repeat;
     background-position: 0 0, 175px 50px;
     animation: backgroundMove 30s linear infinite;
+    overflow: hidden;
 }
 
 @keyframes backgroundMove {
@@ -75,6 +76,18 @@ body {
     aspect-ratio: 16/9;
     transform-style: preserve-3d;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: cardInAnimation 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes cardInAnimation {
+    0% {
+        transform: translateY(100%) rotateY(0deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) rotateY(0deg);
+        opacity: 1;
+    }
 }
 
 .card.flipped {
@@ -206,4 +219,29 @@ li {
     left: 10px;
     color: white;
     font-size: 1.5rem;
+}
+
+#start {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+#start.hidden {
+    display: none;
+}
+
+#start h1 {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#start > div {
+    background-color: rgba(82, 82, 90, 0.11);
+    padding: 20px;
+    border-radius: 25px;
 }
