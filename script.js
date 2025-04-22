@@ -46,6 +46,7 @@ const videoContainer = document.getElementById('videoContainer');
 const ratingContainer = document.getElementById('ratingContainer');
 const nextButton = document.getElementById('nextButton');
 const rankingContainer = document.getElementById('rankingContainer');
+const counter = document.getElementById('counter');
 
 function displayVideo() {
     videoContainer.innerHTML = "";
@@ -112,6 +113,8 @@ function displayVideo() {
         star.addEventListener('click', () => selectRating(i));
         ratingContainer.appendChild(star);
     }
+
+    updateCounter();
 
     // Auto-flip after 3s
     setTimeout(() => {
@@ -200,6 +203,8 @@ nextButton.addEventListener('click', () => {
         }, 300);
     }
 
+    updateCounter();
+
     // After 3s, flip to back and show rating
     setTimeout(() => {
         selectRating(0);
@@ -212,6 +217,10 @@ nextButton.addEventListener('click', () => {
         nextIframe.src = `https://www.youtube.com/embed/${nextVideoId}?rel=0&autoplay=1`;
     }, 4000);
 });
+
+function updateCounter() {
+    counter.innerHTML = `Video ${currentVideoIndex + 1} von ${videos.length}`;
+}
 
 function displayRanking() {
     videoContainer.innerHTML = "";

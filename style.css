@@ -199,3 +199,11 @@ li {
     transition: width 4s linear;
     border-radius: 5px;
 }
+
+#counter {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-size: 1.5rem;
+}
