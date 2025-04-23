@@ -42,7 +42,7 @@ let videos = [
         rating: null,
     },
     {
-        youTubeUrl: "https://www.youtube.com/watch?v=--DG-YwhRV8&t=629s",
+        youTubeUrl: "https://www.youtube.com/watch?v=--DG-YwhRV8",
         title: "1 JAHR Tastatur-Entwicklung ⌨️ (Ab 10:30)",
         creator: "AllesEasy",
         rating: null,
@@ -59,6 +59,14 @@ let videos = [
         title: "Wonderful Dream 🎇 (ft. Rezon) | Queezy Highlights #29",
         creator: "Queezy",
         rating: null,
+    },
+    {
+        youTubeUrl: "https://www.youtube.com/watch?v=Ff4FxaaVFVY",
+        title: "#1 In Ranked Unreal werden + 25k Follower geknackt 🔥 (22:20 - 22:35)",
+        creator: "Tryus Uncut",
+        rating: null,
+        start: 1340,
+        end: 1355
     },
 ];
 
@@ -145,7 +153,7 @@ function displayVideo() {
     // Auto-flip after 3s
     setTimeout(() => {
         const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&start=${video.start || 0}`;
+        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&start=${video.start || 0}&end=${video.end || 0}`;
         iframe.setAttribute("frameborder", "0");
         iframe.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
         iframe.setAttribute("allowfullscreen", "");
