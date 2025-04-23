@@ -112,6 +112,7 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
+    backdrop-filter: blur(3px);
 }
 
 .card-back {
@@ -152,6 +153,7 @@ button {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     font-weight: bold;
+    backdrop-filter: blur(3px);
 }
 
 li {
@@ -169,6 +171,7 @@ li {
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     transition-delay: 0.6s;
     padding: 0 30px 10px;
+    backdrop-filter: blur(3px);
 }
 
 #ratingContainer.hidden {
@@ -207,7 +210,7 @@ li {
 
 .progress {
     height: 100%;
-    background-color: #00ffbb;
+    background-color: #919191;
     width: 0;
     transition: width 4s linear;
     border-radius: 5px;
@@ -262,6 +265,7 @@ li {
     align-items: center;
     justify-content: center;
     gap: 20px;
+    backdrop-filter: blur(3px);
 }
 
 #logo {

@@ -298,6 +298,15 @@ function displayRanking() {
         });
         rankingContainer.appendChild(button);
     }
+
+    setTimeout(
+        () => {
+            //play fortnite-victory-royale-sound-effect-made-with-Voicemod.mp3
+            const audio = new Audio('fortnite-victory-royale-sound-effect-made-with-Voicemod.mp3');
+            audio.play();
+        },
+        3000
+    )
 }
 
 document.getElementById('startButton').addEventListener('click', () => {
