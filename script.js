@@ -234,16 +234,70 @@ function displayRanking() {
     ratingContainer.innerHTML = "";
     ratingContainer.classList.add('hidden');
     nextButton.style.display = "none";
+    rankingContainer.innerHTML = "";
 
+    // Videos nach Rating sortieren
     const sorted = videos.slice().sort((a, b) => b.rating - a.rating);
-    rankingContainer.innerHTML = '<h2>Ranking</h2>';
-    const ol = document.createElement('ol');
-    sorted.forEach(v => {
-        const li = document.createElement('li');
-        li.innerHTML = `${v.title} - ${v.creator}: ${v.rating} Sterne`;
-        ol.appendChild(li);
+
+    // Erstelle das Podest-Container
+    const podiumContainer = document.createElement('div');
+    podiumContainer.classList.add('podium-container');
+
+    // Erstelle die Podestplätze in Reihenfolge: Platz 3, Platz 2, Platz 1
+    const places = [
+        { idx: 1, label: '2. Platz' },
+        { idx: 0, label: '1. Platz' },
+        { idx: 2, label: '3. Platz' },
+    ];
+
+    places.forEach(place => {
+        if (sorted[place.idx]) {
+            const podiumSpot = document.createElement('div');
+            podiumSpot.classList.add('podium-spot');
+            podiumSpot.innerHTML = `<h3>${place.label}</h3>
+                                    <p>${sorted[place.idx].creator} - ${sorted[place.idx].rating} Sterne</p>`;
+
+
+            const videoId = new URL(sorted[place.idx].youTubeUrl).searchParams.get("v");
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
+            iframe.setAttribute("allowfullscreen", "");
+            iframe.style.width = "100%";
+            iframe.style.aspectRatio = "16/9";
+            podiumSpot.appendChild(iframe);
+
+            podiumContainer.appendChild(podiumSpot);
+        }
     });
-    rankingContainer.appendChild(ol);
+
+    rankingContainer.appendChild(podiumContainer);
+
+    // Button für weitere Anzeigen nur anzeigen, wenn mehr als 3 Videos vorhanden sind
+    if (sorted.length > 3) {
+        const button = document.createElement('button');
+        button.textContent = "Weitere Anzeigen";
+        button.classList.add('show-more-button');
+        button.addEventListener('click', () => {
+            // Liste der restlichen Videos ab Platz 4
+            const ol = document.createElement('ul');
+            for (let i = 3; i < sorted.length; i++) {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = sorted[i].youTubeUrl;
+                a.target = "_blank";
+                a.innerHTML = `#${i+1} ${sorted[i].title} - ${sorted[i].creator}: ${sorted[i].rating} Sterne`;
+                li.style.animationDelay = `${i * 0.1}s`;
+                li.appendChild(a);
+                ol.appendChild(li);
+            }
+            // Entferne den Button und füge die Liste hinzu
+            button.remove();
+            rankingContainer.appendChild(ol);
+        });
+        rankingContainer.appendChild(button);
+    }
 }
 
 document.getElementById('startButton').addEventListener('click', () => {

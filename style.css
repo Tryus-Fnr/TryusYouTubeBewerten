@@ -47,7 +47,7 @@ body {
 
 .star.selected {
     color: gold;
-    text-shadow: 0 0 20px gold;
+    text-shadow: 0 0 5px gold;
 }
 
 .star.half {
@@ -55,7 +55,7 @@ body {
     background: linear-gradient(90deg, gold 50%, lightgray 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 20px gold);
+    filter: drop-shadow(0 0 5px gold);
 }
 
 .star:hover {
@@ -267,4 +267,98 @@ li {
     position: absolute;
     top: 25px;
     right: 25px;
+}
+
+.podium-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.podium-spot {
+    background-color: rgba(82, 82, 90, 0.11);
+    border-radius: 25px;
+    width: 300px;
+    position: relative;
+}
+
+.podium-spot h3 {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.podium-container .podium-spot:nth-child(3) {
+    background-color: rgba(205, 127, 50, 0.25);
+    opacity: 0;
+    animation: podium-container-in 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    height: 275px;
+}
+
+.podium-container .podium-spot:nth-child(2) {
+    background-color: rgba(255, 215, 0, 0.25);
+    opacity: 0;
+    animation: podium-container-in 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 3s;
+    height: 325px;
+}
+
+.podium-container .podium-spot:nth-child(1) {
+    background-color: rgba(192, 192, 192, 0.25);
+    opacity: 0;
+    animation: podium-container-in 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 1.5s;
+    height: 300px;
+}
+
+.podium-spot iframe {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 25px;
+}
+
+
+.show-more-button {
+    width: 100%;
+    border-radius: 25px;
+    animation: podium-container-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 4.5s;
+    opacity: 0;
+    margin-top: 20px;
+}
+
+@keyframes podium-container-in {
+     0% {
+         transform: translateY(100%);
+         opacity: 0;
+     }
+     100% {
+         transform: translateY(0);
+         opacity: 1;
+     }
+ }
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0 0;
+}
+
+li {
+    margin: 5px 0;
+    opacity: 0;
+    animation: podium-container-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease-out;
+}
+
+li a:hover {
+    color: #00ffbb;
 }
