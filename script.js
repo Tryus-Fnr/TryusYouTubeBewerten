@@ -41,6 +41,18 @@ let videos = [
         creator: "craithfnr",
         rating: null,
     },
+    {
+        youTubeUrl: "https://www.youtube.com/watch?v=--DG-YwhRV8&t=629s",
+        title: "1 JAHR Tastatur-Entwicklung ⌨️ (Ab 10:30)",
+        creator: "AllesEasy",
+        rating: null,
+    },
+    {
+        youTubeUrl: "https://www.youtube.com/watch?v=IZVUfuy8pDI",
+        title: "Rarin - Kompa 🌴 Fortnite montage",
+        creator: "floxifnr",
+        rating: null,
+    },
 ];
 
 // Shuffle videos
