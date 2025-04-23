@@ -128,7 +128,6 @@ p {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
-    width: max-content;
 }
 
 .card-front h2 {
@@ -234,14 +233,38 @@ li {
     display: none;
 }
 
-#start h1 {
+#start img {
     color: white;
-    text-align: center;
-    margin-top: 20px;
+    animation: shakeIdle 0.5s infinite alternate ease-in-out;
+    transform-origin: center top;
+    width: 200px;
+}
+
+@keyframes shakeIdle {
+    0% {
+        transform: translateY(0);
+        scale: 1;
+    }
+    100% {
+        transform: translateY(-5px);
+        scale: 1.05;
+    }
 }
 
 #start > div {
     background-color: rgba(82, 82, 90, 0.11);
     padding: 20px;
     border-radius: 25px;
+    width: clamp(300px, 50vw, 600px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#logo {
+    position: absolute;
+    top: 25px;
+    right: 25px;
 }
