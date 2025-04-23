@@ -46,6 +46,7 @@ let videos = [
         title: "1 JAHR Tastatur-Entwicklung ⌨️ (Ab 10:30)",
         creator: "AllesEasy",
         rating: null,
+        start: 630,
     },
     {
         youTubeUrl: "https://www.youtube.com/watch?v=IZVUfuy8pDI",
@@ -138,7 +139,7 @@ function displayVideo() {
     // Auto-flip after 3s
     setTimeout(() => {
         const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
+        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&start=${video.start || 0}`;
         iframe.setAttribute("frameborder", "0");
         iframe.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
         iframe.setAttribute("allowfullscreen", "");
@@ -272,7 +273,7 @@ function displayRanking() {
 
             const videoId = new URL(sorted[place.idx].youTubeUrl).searchParams.get("v");
             const iframe = document.createElement('iframe');
-            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&start=${sorted[place.idx].start || 0}`;
             iframe.setAttribute("frameborder", "0");
             iframe.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
             iframe.setAttribute("allowfullscreen", "");
