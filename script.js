@@ -54,6 +54,12 @@ let videos = [
         creator: "floxifnr",
         rating: null,
     },
+    {
+        youTubeUrl: "https://www.youtube.com/watch?v=tlB5tGvKZwE",
+        title: "Wonderful Dream 🎇 (ft. Rezon) | Queezy Highlights #29",
+        creator: "Queezy",
+        rating: null,
+    },
 ];
 
 // Shuffle videos
