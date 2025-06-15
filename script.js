@@ -1,73 +1,64 @@
 let videos = [
     {
-        youTubeUrl: "https://www.youtube.com/watch?v=w_ljRNeemrA",
-        title: "Next Exit | Peterbot Highlights #41",
-        creator: "Peterbot",
+        youTubeUrl: "https://www.youtube.com/watch?v=-i3PYIv4WCE",
+        title: "Freestyle 2 (Fortnite Montage) (ft. Rohat, Willy)",
+        creator: "n1ckfnr",
         rating: null,
     },
     {
-        youTubeUrl: "https://www.youtube.com/watch?v=RqwiB2uAF3g",
-        title: "I know Love❤️ | Verbex Highlights #5",
-        creator: "Verbex",
+        youTubeUrl: "https://www.youtube.com/watch?v=NT8Iv7I6kEo",
+        title: "Lush Life 🏝️(ft. Amar, Clix) | Fortnite Highlights #20",
+        creator: "cloudz44",
         rating: null,
     },
     {
-        youTubeUrl: "https://www.youtube.com/watch?v=VRJ-PTSrE54",
-        title: "The London | Highlights #3",
-        creator: "Kapuzenlarry",
+        youTubeUrl: "https://www.youtube.com/watch?v=nafwKz-peic",
+        title: "Just Like Fire 🔥 | Lucania Highlights #2 (ft. Mongraal)",
+        creator: "Lucaniafn",
         rating: null,
     },
     {
-        youTubeUrl: "https://www.youtube.com/watch?v=EhsHb4tva34",
-        title: "Dum, Dumb, and Dumber 🤪 | Fortnite highlights #20 | ft. Peterbot",
-        creator: "eynifnr",
+        youTubeUrl: "https://www.youtube.com/watch?v=gDMFEWPYddA",
+        title: "Next Exit | 9una Highlights",
+        creator: "9una",
         rating: null,
     },
     {
-        youTubeUrl: "https://www.youtube.com/watch?v=a7Xfe-Z3lPE",
-        title: "Locked out of Heaven🎺 | Memo highlights #1",
-        creator: "Memo",
+        youTubeUrl: "https://www.youtube.com/watch?v=f8l2w9OwBWk",
+        title: "La La La 🎶 | Fortnite highlights for @minihz",
+        creator: "LucaontecVFX",
         rating: null,
     },
     {
-        youTubeUrl: "https://www.youtube.com/watch?v=cUuM2yq9H48",
-        title: "#1 Highlights 🔥",
-        creator: "999cedi",
+        youTubeUrl: "https://www.youtube.com/watch?v=2wIYAGq3DrE",
+        title: "Next Exit | (Chapter 6 Fortnite Montage) | Highlights #2",
+        creator: "Scriptfn",
         rating: null,
     },
     {
-        youTubeUrl: "https://www.youtube.com/watch?v=84Z7DF4eBoY",
-        title: "End of Beginning 💔 (Fortnite Montage)",
-        creator: "craithfnr",
+        youTubeUrl: "https://www.youtube.com/watch?v=FDxSunULxCY",
+        title: "Infinity 🌙 (Fortnite Montage)",
+        creator: "thebig_jj_",
         rating: null,
     },
     {
-        youTubeUrl: "https://www.youtube.com/watch?v=--DG-YwhRV8",
-        title: "1 JAHR Tastatur-Entwicklung ⌨️ (Ab 10:30)",
-        creator: "AllesEasy",
-        rating: null,
-        start: 630,
-    },
-    {
-        youTubeUrl: "https://www.youtube.com/watch?v=IZVUfuy8pDI",
-        title: "Rarin - Kompa 🌴 Fortnite montage",
-        creator: "floxifnr",
+        youTubeUrl: "https://www.youtube.com/watch?v=zu6Ug6Hx-Hk",
+        title: "74Sweat | Fortnite Highlights #87",
+        creator: "74Sweat",
         rating: null,
     },
     {
-        youTubeUrl: "https://www.youtube.com/watch?v=tlB5tGvKZwE",
-        title: "Wonderful Dream 🎇 (ft. Rezon) | Queezy Highlights #29",
-        creator: "Queezy",
+        youTubeUrl: "https://www.youtube.com/watch?v=ae3PJj_la04",
+        title: "TOUCHDOWN 🏈| REDBONE 🦴| ft. MrSavage, Rezon, Vadeal | ( Chapter 6 Fortnite Montage) | Highlight #15",
+        creator: "exqu777",
         rating: null,
     },
     {
-        youTubeUrl: "https://www.youtube.com/watch?v=Ff4FxaaVFVY",
-        title: "#1 In Ranked Unreal werden + 25k Follower geknackt 🔥 (22:20 - 22:35)",
-        creator: "Tryus Uncut",
+        youTubeUrl: "https://www.youtube.com/watch?v=hOwpw9KBVs4",
+        title: "I KNOW LOVE ❤️ (ft. panzer) | Fortnite Highlights #1",
+        creator: "p1otr3k",
         rating: null,
-        start: 1340,
-        end: 1355
-    },
+    }
 ];
 
 // Shuffle videos
@@ -330,6 +321,7 @@ function displayRanking() {
         () => {
             //play fortnite-victory-royale-sound-effect-made-with-Voicemod.mp3
             const audio = new Audio('fortnite-victory-royale-sound-effect-made-with-Voicemod.mp3');
+            audio.volume = 0.5;
             audio.play();
         },
         3000
